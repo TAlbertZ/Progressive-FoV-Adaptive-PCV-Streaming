@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
@@ -7,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>PCV_FoV_Prediction</title>
+<title>Progressive FoV-Adaptive PCV Streaming</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="PCV_FoV_Prediction" />
+<meta property="og:title" content="Progressive FoV-Adaptive PCV Streaming" />
 <meta property="og:locale" content="en_US" />
-<link rel="canonical" href="https://chenli1996.github.io/PCV_FoV_Prediction/" />
-<meta property="og:url" content="https://chenli1996.github.io/PCV_FoV_Prediction/" />
-<meta property="og:site_name" content="PCV_FoV_Prediction" />
+<link rel="canonical" href="https://talbertz.github.io/Progressive-FoV-Adaptive-PCV-Streaming/" />
+<meta property="og:url" content="https://talbertz.github.io/Progressive-FoV-Adaptive-PCV-Streaming/" />
+<meta property="og:site_name" content="Progressive FoV-Adaptive PCV Streaming" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="PCV_FoV_Prediction" />
+<meta property="twitter:title" content="Progressive FoV-Adaptive PCV Streaming" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","headline":"PCV_FoV_Prediction","name":"PCV_FoV_Prediction","url":"https://chenli1996.github.io/PCV_FoV_Prediction/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","headline":"Progressive FoV-Adaptive PCV Streaming","name":"Progressive FoV-Adaptive PCV Streaming","url":"https://talbertz.github.io/Progressive-FoV-Adaptive-PCV-Streaming/"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/PCV_FoV_Prediction/assets/css/style.css?v=d4c2e1349bec8f79d779f7a0975e1bb1de7a5bba">
+    <link rel="stylesheet" href="/Progressive FoV-Adaptive PCV Streaming/assets/css/style.css?v=d4c2e1349bec8f79d779f7a0975e1bb1de7a5bba">
     <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
 
 <!-- Setup Google Analytics -->
@@ -29,7 +28,7 @@
 
 
 <!-- You can set your favicon here -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="/PCV_FoV_Prediction/favicon.ico" -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/Progressive FoV-Adaptive PCV Streaming/favicon.ico" -->
 
 <!-- end custom head snippets -->
 
@@ -37,7 +36,7 @@
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
       
-      <h1><a href="https://chenli1996.github.io/PCV_FoV_Prediction/">PCV_FoV_Prediction</a></h1>
+      <h1><a href="https://talbertz.github.io/Progressive-FoV-Adaptive-PCV-Streaming/">Progressive FoV-Adaptive PCV Streaming</a></h1>
       
 
       <!-- MathJax Configuration -->
@@ -60,15 +59,108 @@
 
 <h1 id="abstract">Abstract</h1>
 
-<p>Field-of-View (FoV) adaptive streaming significantly reduces bandwidth requirement of immersive point cloud   video (PCV) by only transmitting visible points in a viewer’s FoV. The traditional approaches often focus on trajectory-based 6 degree-of-freedom (6DoF) FoV predictions. The predicted FoV is then used to calculate point visibility. Such approaches do not explicitly consider video content’s impact on viewer attention, and the conversion from FoV to point visibility is often error-prone and time-consuming. We reformulate the PCV FoV prediction problem from the cell visibility perspective, allowing for precise decision-making regarding the transmission of 3D data at the cell level based on the predicted visibility distribution. We develop a novel spatial visibility and object-aware graph model that leverages the historical 3D visibility data and incorporates spatial perception, neighboring cell correlation, and occlusion information to predict the cell visibility in the future. 
-Our model significantly improves the long-term cell  visibility prediction, reducing the prediction MSE loss by up to 50% compared to the state-of-the-art models while maintaining real-time performance (more than 30fps) for point cloud videos with over 1 million points.</p>
+<p>Many XR applications require the delivery of volumetric video to users with six degrees of freedom (6-DoF) movements. Point Cloud has become a popular volumetric video format. A dense point cloud consumes much higher bandwidth than a 2D/360 degree video frame. User Field of View (FoV) is more dynamic with 6-DoF movement than 3-DoF movement. To save bandwidth, FoV-adaptive streaming predicts a user's FoV and only downloads point cloud data falling in the predicted FoV. However, it is vulnerable to FoV prediction errors, which can be significant when a long buffer is utilized for smoothed streaming. In this work, we propose a multi-round progressive refinement framework for point cloud video streaming. Instead of sequentially downloading point cloud frames, our solution simultaneously downloads/patches multiple frames falling into a sliding time-window, leveraging the inherent scalability of octree-based point-cloud coding. The optimal rate allocation among all tiles of active frames are solved analytically using the heterogeneous tile rate-quality functions calibrated by the predicted user  FoV. Multi-frame downloading/patching simultaneously takes advantage of the streaming smoothness resulting from long buffer and the FoV prediction accuracy at short buffer length. We evaluate our streaming solution using simulations driven by real point cloud videos, real bandwidth traces, and 6-DoF FoV traces of real users. Our solution is robust against the bandwidth/FoV prediction errors, and can deliver high and smooth view quality in the face of bandwidth variations and dynamic user and point cloud movements.</p>
 
 <h1 id="introduction">Introduction</h1>
-<p>AR/VR applications are rapidly growing, with immersive video streaming—such as 360-degree and point cloud videos—being essential for widespread adoption. These videos require significantly higher bandwidth than traditional 2D videos; for example, a point cloud video with 300k to 1M points demands 1.08 Gbps to 3.6 Gbps. A solution is Field of View (FoV) adaptive streaming, which transmits only the video content within the viewer’s viewport, reducing bandwidth by as much as six times for 360-degree videos.</p>
+<p>Point cloud video streaming will take telepresence to the next level by delivering full-fledged 3D information of the remote scene and facilitating six-degree-of-freedom (6-DoF) viewpoint selection to create a truly immersive experience. Leaping from planar (2D) to volumetric (3D) video poses significant communication and computation challenges. A point cloud video consists of a sequence of frames that characterize the motions of one or multiple physical/virtual objects. Each frame is a 3D snapshot, in the form of point cloud captured by a 3D scanner, e.g., LiDAR camera, or a camera array using photogrammetry. A high-fidelity point cloud frame of a single object can easily contain one million points, each of which has three 32-bit Cartesian coordinates and three 8-bit color attributes. At 30 frames/second, the raw data rate of a point cloud video (PCV) of a single object reaches 3.6 Gbps. The raw data rate required to describe a 3D scene with multiple objects increases proportionally. </p>
 
-<p>However, accurately predicting the viewer’s future FoV is challenging, as it requires a buffer of 2 to 5 seconds for smooth streaming. Current methods typically involve predicting the viewport based on past trajectories, which can lead to errors. We propose a direct approach to predict cell visibility using the viewer’s trajectory, historical visibility, and spatial features of the objects. This method can reduce error amplification and leverage continuity in visibility changes. Our framework improves long-term visibility prediction accuracy by up to 50% in real-time using actual point cloud video and viewport trajectory datasets.</p>
+<p>Meanwhile, on the receiver side, a PCV viewer enjoys 6-DoF viewpoint selection through translational ({\it x, y, z}) and head rotational ({\it pitch, yaw, roll}) movements. Given the relative position between the object and the viewer's viewpoint, the compressed PCV will be decompressed and rendered on a 2D or 3D display, which also consumes significant computation resources. 
+Furthermore, to facilitate seamless interaction and avoid motion sickness, the rendered view has to be delivered with short latency (e.g. $<$20 ms) after the viewer movement, the so called Motion-to-Photon (MTP) latency constraint. As a result, PCV not only consumes more bandwidth and computation resources, it is additionally subject to stringent end-to-end latency budget for processing and delivery.</p>
 
+<p>The goal of this work is to address the high-bandwidth, high-complexity and low-latency challenges of point cloud video by designing a novel progressive refinement streaming framework, where multiple frames falling into a sliding time window are patched simultaneously for multiple rounds, leveraging the inherent scalability of octree-based point-cloud coding.} We will focus on video-on-demand applications, leaving the live PCV streaming and the ultimate challenge of realtime two-way interactive PCV streaming for future research.</p>
 
+Towards developing this progressive streaming framework, we made the following contributions:
+<ol>
+<li>We design a novel {\it sliding-window based  progressive streaming framework} to gradually refine the spatial resolution of each tile as its playback time approaches and the FoV prediction accuracy improves. We investigate the trade-off between the need of long-buffer for absorbing bandwidth variations and the need of short-buffer for accurate FoV prediction.</li>
+<li>We propose a novel point cloud tile rate-quality model that reflects the Quality of Experience (QoE) of PCV viewers both theoretically and empirically.</li>
+<li>The tile rate allocation decision is  formulated as a utility maximization problem. To get the optimal solution, an analytical algorithm based on Karush–Kuhn–Tucker (KKT) conditions is developed.</li>
+
+<li>The superiority of our proposed algorithm is evaluated using PCV streaming simulations driven by  real point cloud video codec and real-world bandwidth traces.</li>
+</ol>
+
+<h1 id="methodology">Methodology</h1>
+
+<p><img src="images/6dov_demo.jpg" alt="Figure 2: Experimental Setup" width="70%" /></p>
+
+<p>6DoF FoV Demonstration. As in Fig.(a), the content within the pyramid which is bounded with far plane and near plane is inside the viewport and any content outside pyramid will not be seen by viewer. Furthermore, even though some points are inside the viewport, they are still not visible if occluded by other points. So if there is a viewer watching the point cloud content from side as Fig. 1(a) shows (the actual view is shown in Fig.1(b)), only the highlighted part in Fig. 1(a) would be the visible. If the point cloud is divided into  3D cells like in Fig. 1(c), only the cells covering the visible points need to be transmitted.</p>
+
+<h2 id="overview-of-our-cell-visibility-prediction-system">Overview of Our Cell Visibility Prediction System</h2>
+
+<!-- <img src="images/system_cap.png" alt="Figure 2: Experimental Setup" width="90%"/> -->
+
+<p><img src="images/system.png" alt="Figure 2: Experimental Setup" width="90%" /></p>
+
+<p>The curve on the top is the viewer’s 6DoF viewport trajectory, illustrating one of the the 6DoF coordinates $(x,y,z,\psi,\theta, \phi)$ at each frame time $t$  for a point cloud sequence set $\mathcal{P}^{h+f}$.
+We partition the whole space into 3D cells and model the cells into 3D grid-like graph. For each frame $t$, based on the 6DoF coordinates and $P^i$, we can calculate, for each cell $i$,  the total number of points $O_i$, visible points $V_i$, and percent of cell volume within the viewport (called the cell-based viewport feature) $F_i$. We use $G_i=[O_i, F_i, V_i, E_i]$ to represent the node feature for each frame, where $E_i$ is other features like the coordinates of each cell. We use a  temporal Bidirectional GRU model and a spatial transformer-based graph model to capture patterns in viewer attention and cell visibility. GRU model captures each node’s temporal pattern over time, which is encoded into the hidden state $S_h$. In the graph model, each node aggregates its neighbor’s information and hidden state from GRU, as the dash line shows. To simplify the graph, we only show the graph attention updating on the $G_1$. After we got the $S_{h+1}$ and $S^{‘}_{0}$ from bi-directional GRU, a MLP modal will predict the cell visibility at the target time stamp $t^{h+f}$. Before the final output, the $O^{h+f}$ will be applied as mask to get the predicted visibility $\hat{V}^{h+f}$, since in the streaming system, the server has the point cloud at frame $h+f$. We can optionally predict the overlap ratios between viewport and cells, $\hat{F}^{h+f}$, as well (which essentially predict the viewport). The $\hat{Y}^{h+f}$ is the prediction output, indicating either  $\hat{V}^{h+f}$ or $\hat{F}^{h+f}$.</p>
+
+<h2 id="node-features">Node features</h2>
+
+<!-- <img src="images/featurea_democap.png" alt="Figure 2: Experimental Setup" width="50%"/> -->
+
+<p><img src="images/feature_demo.jpg" alt="Figure 2: Experimental Setup" width="60%" /></p>
+
+<p>In this illustration, given view’s 6DoF and the point cloud frame in 3D cell, we can get the occupancy feature, viewport feature and visibility feature, as $o_i, f_i, v_i$. We have 8 node in total, and 5 of the node with color is occupied by points and has different number of points. $n_6$ has 10 points in total but can be occluded by other points and visibility is 0.4. For other node without points, the visibility feature is set as 0.</p>
+
+<h1 id="selected-results">Selected Results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Method</strong></th>
+      <th><strong>333ms</strong></th>
+      <th><strong>1000ms</strong></th>
+      <th><strong>2000ms</strong></th>
+      <th><strong>5000ms</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LR</strong></td>
+      <td>0.0043</td>
+      <td>0.0102</td>
+      <td>0.0173</td>
+      <td>0.0229</td>
+    </tr>
+    <tr>
+      <td><strong>TLR</strong></td>
+      <td>0.0028</td>
+      <td>0.0085</td>
+      <td>0.0158</td>
+      <td>0.0223</td>
+    </tr>
+    <tr>
+      <td><strong>M-MLP</strong></td>
+      <td>0.0036</td>
+      <td>0.0093</td>
+      <td>0.0137</td>
+      <td>0.0232</td>
+    </tr>
+    <tr>
+      <td><strong>M-LSTM</strong></td>
+      <td><strong>0.0026</strong></td>
+      <td><strong>0.0083</strong></td>
+      <td>0.0126</td>
+      <td>0.0146</td>
+    </tr>
+    <tr>
+      <td><strong>Ours</strong></td>
+      <td>0.0040</td>
+      <td>0.0100</td>
+      <td><strong>0.0110</strong></td>
+      <td><strong>0.0120</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>Table 1: MSE of Visibility Prediction by Different Methods at Different Prediction Horizons</em></p>
+
+<p>In this table, we report the MSE losses for different methods across various prediction horizons. For short-term predictions (less than 1000 ms), our model maintains a relatively consistent cell visibility prediction loss. More importantly, for long-term cell visibility predictions, our model reduces the MSE loss by up to 20\% compared to all state-of-the-art methods. This improvement is significant for on-demand point cloud video streaming with target buffer length around 5 second. Our model effectively addresses the error amplification issue of trajectory-based methods, and captures the temporal and spatial patterns in viewer’s attention and cell visibility.</p>
+
+<p><img src="images/in-FoV_pred.png" alt="Figure 2: Experimental Setup" width="50%" /></p>
+
+<p>*Viewport prediction loss with different prediction horizon, from 10 frames(333ms) to 150 frames(5000ms).</p>
+
+<p>Our model consistently outperforms all the state-of-the-art baselines across all prediction horizons, demonstrating the superiority of our spatial perception method over the traditional trajectory-based approaches. The performance gaps widen at the longer prediction horizon of 5 second (or 150 frames).</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
