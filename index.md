@@ -61,7 +61,7 @@
 
 <p>Many XR applications require the delivery of volumetric video to users with six degrees of freedom (6-DoF) movements. Point Cloud has become a popular volumetric video format. A dense point cloud consumes much higher bandwidth than a 2D/360 degree video frame. User Field of View (FoV) is more dynamic with 6-DoF movement than 3-DoF movement. To save bandwidth, FoV-adaptive streaming predicts a user's FoV and only downloads point cloud data falling in the predicted FoV. However, it is vulnerable to FoV prediction errors, which can be significant when a long buffer is utilized for smoothed streaming. In this work, we propose a multi-round progressive refinement framework for point cloud video streaming. Instead of sequentially downloading point cloud frames, our solution simultaneously downloads/patches multiple frames falling into a sliding time-window, leveraging the inherent scalability of octree-based point-cloud coding. The optimal rate allocation among all tiles of active frames are solved analytically using the heterogeneous tile rate-quality functions calibrated by the predicted user  FoV. Multi-frame downloading/patching simultaneously takes advantage of the streaming smoothness resulting from long buffer and the FoV prediction accuracy at short buffer length. We evaluate our streaming solution using simulations driven by real point cloud videos, real bandwidth traces, and 6-DoF FoV traces of real users. Our solution is robust against the bandwidth/FoV prediction errors, and can deliver high and smooth view quality in the face of bandwidth variations and dynamic user and point cloud movements.</p>
 
-<h1 id="introduction">Introduction</h1>
+<!-- <h1 id="introduction">Introduction</h1>
 <p>Point cloud video streaming will take telepresence to the next level by delivering full-fledged 3D information of the remote scene and facilitating six-degree-of-freedom (6-DoF) viewpoint selection to create a truly immersive experience. Leaping from planar (2D) to volumetric (3D) video poses significant communication and computation challenges. A point cloud video consists of a sequence of frames that characterize the motions of one or multiple physical/virtual objects. Each frame is a 3D snapshot, in the form of point cloud captured by a 3D scanner, e.g., LiDAR camera, or a camera array using photogrammetry. A high-fidelity point cloud frame of a single object can easily contain one million points, each of which has three 32-bit Cartesian coordinates and three 8-bit color attributes. At 30 frames/second, the raw data rate of a point cloud video (PCV) of a single object reaches 3.6 Gbps. The raw data rate required to describe a 3D scene with multiple objects increases proportionally. </p>
 
 <p>Meanwhile, on the receiver side, a PCV viewer enjoys 6-DoF viewpoint selection through translational ({\it x, y, z}) and head rotational ({\it pitch, yaw, roll}) movements. Given the relative position between the object and the viewer's viewpoint, the compressed PCV will be decompressed and rendered on a 2D or 3D display, which also consumes significant computation resources. 
@@ -76,9 +76,9 @@ Towards developing this progressive streaming framework, we made the following c
 <li>The tile rate allocation decision is  formulated as a utility maximization problem. To get the optimal solution, an analytical algorithm based on Karush–Kuhn–Tucker (KKT) conditions is developed.</li>
 
 <li>The superiority of our proposed algorithm is evaluated using PCV streaming simulations driven by  real point cloud video codec and real-world bandwidth traces.</li>
-</ol>
+</ol> -->
 
-<h1 id="methodology">Methodology</h1>
+<h1 id="octree-based scalable pcv coding">Octree-based Scalable PCV Coding</h1>
 
 <p><img src="images/6dov_demo.jpg" alt="Figure 2: Experimental Setup" width="70%" /></p>
 
