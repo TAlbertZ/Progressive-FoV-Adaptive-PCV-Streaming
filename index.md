@@ -48,6 +48,8 @@
 
 <p>Scalable PCV coding opens up a new dimension to reconcile the conflicting desires for long streaming buffer and short FoV prediction interval. It allows us to <b>progressively download and patch</b> tiles: when a frame's playback deadline is still far ahead, we only have a rough FoV estimate for it, and will download  low resolution slices of tiles overlapping with the predicted FoV; as the deadline approaches, we have more accurate FoV prediction, and will <i>patch</i> the frame by downloading additional enhancement slices for tiles falling into the predicted FoV. <i>Progressive streaming is promising to simultaneously achieve streaming smoothness and robustness against bandwidth variations and FoV prediction errors.</i> On one hand, as shown in Fig. 2, each tile in each segment is downloaded over multiple rounds, the interval of which is $\Delta$. For example, tiles of $seg_{i+3}$ are downloaded in both round $i\Delta$ and round $(i+1)\Delta$. Traditional methods  download the segment only once in round $i\Delta$ based on the FoV prediction at this moment. The benefit of downloading $seg_{i+3}$ in two rounds is that FoV prediction in round $(i+1)\Delta$ is more accurate than in round $i\Delta$. Therefore, the bandwidth can be allocated to the tiles that would be more likely viewed by user.</p>
 
+<p>In our paper, we detailed the formulation of the tile rate allocation problem, the KKT Condition based optimization algorithm design, as well as the proposed view-distance based tile utility model.</p>
+
 <h1 id="selected-results">Selected Results</h1>
 
 <table>
