@@ -83,7 +83,7 @@
 
 <!-- <img src="images/featurea_democap.png" alt="Figure 2: Experimental Setup" width="50%"/> -->
 
-<p><img src="images/seg_download.png" alt="Figure 2: Progressive Streaming Illustration" width="60%" /></p>
+<p><img src="images/seg_download.png" alt="Figure 2: Progressive Streaming Illustration" width="40%" /></p>
 
 <p>Due to the close interaction with PCV objects, viewers are highly sensitive to  QoE impairments, such as black screen, freezes, restarts, excessively long latency, etc. Not only the network and viewer dynamics have direct QoE impacts, bandwidth and FoV prediction errors are also critical for the  effectiveness of predictive streaming. We propose a novel <i>progressive FoV-adaptive PCV  streaming design</i> to minimize the occurrence of the above impairments and deliver a high level of viewer QoE.</p>
 
