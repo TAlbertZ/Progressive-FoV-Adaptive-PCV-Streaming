@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Progressive FoV-Adaptive PCV Streaming</title>
+<!-- <title>Progressive FoV-Adaptive PCV Streaming</title> -->
 <!-- <meta name="generator" content="Jekyll v3.10.0" />
 <meta property="og:title" content="Progressive FoV-Adaptive PCV Streaming" />
 <meta property="og:locale" content="en_US" />
@@ -144,7 +144,7 @@
 
 <p>In this table, we report the MSE losses for different methods across various prediction horizons. For short-term predictions (less than 1000 ms), our model maintains a relatively consistent cell visibility prediction loss. More importantly, for long-term cell visibility predictions, our model reduces the MSE loss by up to 20\% compared to all state-of-the-art methods. This improvement is significant for on-demand point cloud video streaming with target buffer length around 5 second. Our model effectively addresses the error amplification issue of trajectory-based methods, and captures the temporal and spatial patterns in viewer’s attention and cell visibility.</p>
 
-<p><img src="images/in-FoV_pred.png" alt="Figure 2: Experimental Setup" width="50%" /></p>
+<!-- <p><img src="images/in-FoV_pred.png" alt="Figure 2: Experimental Setup" width="50%" /></p> -->
 
 <p>*Viewport prediction loss with different prediction horizon, from 10 frames(333ms) to 150 frames(5000ms).</p>
 
