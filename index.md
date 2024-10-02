@@ -16,11 +16,11 @@
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Progressive FoV-Adaptive PCV Streaming" />
-<!-- <script type="application/ld+json"> -->
-<!-- {"@context":"https://schema.org","@type":"WebSite","headline":"Progressive FoV-Adaptive PCV Streaming","name":"Progressive FoV-Adaptive PCV Streaming","url":"https://talbertz.github.io/Progressive-FoV-Adaptive-PCV-Streaming/"}</script> -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","headline":"Progressive-FoV-Adaptive-PCV-Streaming","name":"Progressive FoV-Adaptive PCV Streaming","url":"https://talbertz.github.io/Progressive-FoV-Adaptive-PCV-Streaming/"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <!-- <link rel="stylesheet" href="/Progressive FoV-Adaptive PCV Streaming/assets/css/style.css?v=d4c2e1349bec8f79d779f7a0975e1bb1de7a5bba"> -->
+    <link rel="stylesheet" href="/Progressive FoV-Adaptive PCV Streaming/assets/css/style.css?v=d4c2e1349bec8f79d779f7a0975e1bb1de7a5bba">
     <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
 
 <!-- Setup Google Analytics -->
