@@ -14,7 +14,8 @@
 <!-- MathJax CDN -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
 
-<p>Paper Link:</p>
+<p>Paper link: <a href="https://arxiv.org/pdf/2303.08336">Progressive Frame Patching for FoV-based Point Cloud  Video Streaming
+</a></p>
 
 <h1 id="abstract">Abstract</h1>
 
