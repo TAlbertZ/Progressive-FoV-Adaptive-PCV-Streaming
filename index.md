@@ -1,4 +1,4 @@
-      <!-- MathJax Configuration -->
+<!-- MathJax Configuration -->
 <script>
   window.MathJax = {
     tex: {
