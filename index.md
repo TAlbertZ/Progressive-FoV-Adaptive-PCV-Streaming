@@ -52,68 +52,41 @@
 
 <h1 id="selected-results">Selected Results</h1>
 
+<p><img src="images/render_results.jpg" alt="Figure 3: rendered views" width="100%" /></p>
+
+
+<p>In the above figures, we show the example reandered views of different baselines. The artifacts of "Equal Split" and "Non-Progressive" can be easily observed. Non-progressive result looks weird because it downloads each frame only once when the the frame is about to be download into buffer and the FoV prediction is very inaccurate. The Equal Split equally split the predicted available bandwidth over all the tiles within the predicted FoV of every frame, which fails ti consider the heterogeneity of different tiles in terms of marginal utility. For state-of-art "RUMA", when we zoom in we can see the obvious artifacts around hair, right face and chest as well as left thigh, while there's no obvious artifacts for "KKT-exp" which is the best version of our KKT Condition based progressive streaming strategy. We also show the average PSNR and SSIM results in the table below. We conclude that the proposed KKT-Condition based progressive downloading strategy performs better than the baselines in terms of the projected results, which also proves the rationality of the proposed tile utility model.</p>
+
+<p><em>Table 1: Rendered Quality: Average PSNR and SSIM</em></p>
+
 <table>
   <thead>
     <tr>
-      <th><strong>Method</strong></th>
-      <th><strong>333ms</strong></th>
-      <th><strong>1000ms</strong></th>
-      <th><strong>2000ms</strong></th>
-      <th><strong>5000ms</strong></th>
+      <th><strong>Metrics</strong></th>
+      <th><strong>KKT-exp</strong></th>
+      <th><strong>RUMA</strong></th>
+      <th><strong>Equal Split</strong></th>
+      <th><strong>Non-Progressive</strong></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>LR</strong></td>
-      <td>0.0043</td>
-      <td>0.0102</td>
-      <td>0.0173</td>
-      <td>0.0229</td>
+      <td><strong>PSNR</strong></td>
+      <td>43.05</td>
+      <td>42.89</td>
+      <td>42.76</td>
+      <td>41.88</td>
     </tr>
     <tr>
-      <td><strong>TLR</strong></td>
-      <td>0.0028</td>
-      <td>0.0085</td>
-      <td>0.0158</td>
-      <td>0.0223</td>
-    </tr>
-    <tr>
-      <td><strong>M-MLP</strong></td>
-      <td>0.0036</td>
-      <td>0.0093</td>
-      <td>0.0137</td>
-      <td>0.0232</td>
-    </tr>
-    <tr>
-      <td><strong>M-LSTM</strong></td>
-      <td><strong>0.0026</strong></td>
-      <td><strong>0.0083</strong></td>
-      <td>0.0126</td>
-      <td>0.0146</td>
-    </tr>
-    <tr>
-      <td><strong>Ours</strong></td>
-      <td>0.0040</td>
-      <td>0.0100</td>
-      <td><strong>0.0110</strong></td>
-      <td><strong>0.0120</strong></td>
+      <td><strong>SSIM</strong></td>
+      <td>0.9725</td>
+      <td>0.9695</td>
+      <td>0.9691</td>
+      <td>0.9610</td>
     </tr>
   </tbody>
 </table>
 
-<p><em>Table 1: MSE of Visibility Prediction by Different Methods at Different Prediction Horizons</em></p>
-
-<p>In this table, we report the MSE losses for different methods across various prediction horizons. For short-term predictions (less than 1000 ms), our model maintains a relatively consistent cell visibility prediction loss. More importantly, for long-term cell visibility predictions, our model reduces the MSE loss by up to 20\% compared to all state-of-the-art methods. This improvement is significant for on-demand point cloud video streaming with target buffer length around 5 second. Our model effectively addresses the error amplification issue of trajectory-based methods, and captures the temporal and spatial patterns in viewer’s attention and cell visibility.</p>
-
-<!-- <p><img src="images/in-FoV_pred.png" alt="Figure 2: Experimental Setup" width="50%" /></p> -->
-
-<p>*Viewport prediction loss with different prediction horizon, from 10 frames(333ms) to 150 frames(5000ms).</p>
-
-<p>Our model consistently outperforms all the state-of-the-art baselines across all prediction horizons, demonstrating the superiority of our spatial perception method over the traditional trajectory-based approaches. The performance gaps widen at the longer prediction horizon of 5 second (or 150 frames).</p>
-
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this paper, we introduce a novel spatial-based FoV prediction approach designed to predict long-term cell visibility for PCV. Our method leverages both spatial and temporal dynamics of PCV objects and viewers, outperforming existing state-of-the-art methods in terms of prediction accuracy and robustness. By integrating Transformer-based GNNs and graph attention networks, our model efficiently captures complex relationships between neighboring cells with a single graph layer. This approach overcomes the limitations of trajectory-based FoV prediction by incorporating the full spatial context, resulting in more accurate and stable predictions. Our spatial-based FoV prediction model presents a promising solution for long-term 6-DoF FoV prediction, immersive video streaming, and 3D rendering. We will make the code available to support further research and development in this area.</p>
-
-
-      
+<p>As volumetric video is on the rise, we explore the design space of point cloud video streaming which is challenging due to its high communication and computation requirements. By relying on the inherent scalability of octree-based point cloud coding, we proposed a novel <i>sliding-window based progressive streaming framework</i> to gradually refine the spatial resolution of each tile as its playback time approaches and FoV prediction accuracy improves. In this way, we managed to balance needs of long streaming buffer for absorbing bandwidth variations and short streaming buffer for accurate FoV prediction. We developed an analytically optimal algorithm based on the Karush–Kuhn–Tucker (KKT) conditions to solve the tile rate allocation problem. We also proposed a novel tile rate-utility model that explicitly considers the viewing distance to better reflect the true user QoE.</p>
