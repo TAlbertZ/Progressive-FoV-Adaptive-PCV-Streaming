@@ -1,10 +1,3 @@
-  </head>
-  <body>
-    <div class="container-lg px-3 my-5 markdown-body">
-      
-      <h1><a href="https://talbertz.github.io/Progressive-FoV-Adaptive-PCV-Streaming/">Progressive FoV-Adaptive PCV Streaming</a></h1>
-      
-
       <!-- MathJax Configuration -->
 <script>
   window.MathJax = {
